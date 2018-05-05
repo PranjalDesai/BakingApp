@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorAccent">
+        <TextView
+            android:id="@+id/appwidget_title_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@color/colorAccent"
+            android:contentDescription="@string/appwidget_title_text"
+            android:text="@string/appwidget_title_text"
+            android:textColor="@color/black"
+            android:padding="@dimen/fab_margin"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:id="@+id/appwidget_title_button"
+            android:background="@color/colorAccent"
+            android:src="@android:drawable/ic_input_add"
+            android:tint="@color/black"
+            android:padding="@dimen/fab_margin"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/appwidget_body_text"
+        android:layout_width="match_parent"
+        android:padding="@dimen/fab_margin"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:contentDescription="@string/appwidget_body_text"
+        android:text="@string/appwidget_body_text"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+</LinearLayout>

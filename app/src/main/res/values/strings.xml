@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Baking App</string>
+    <string name="title_step_list">Steps</string>
+    <string name="title_step_detail">Step Detail</string>
+    <string name="apiData">apiData</string>
+    <string name="apiDataPreferences">pref_api_data</string>
+    <string name="recipe_name">RecipeName</string>
+    <string name="serving_size">ServingSize</string>
+    <string name="title_ingredients">Ingredients:</string>
+    <string name="title_steps">Steps:</string>
+    <string name="appwidget_title_text">Recipe Title</string>
+    <string name="appwidget_body_text">Click on the button to add recipe to widget</string>
+    <string name="add_widget">Add widget</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="recipe">Recipe</string>
+    <string name="steps">Steps</string>
+    <string name="baking">baking</string>
+    <string name="ingredient_widget_list">bakingIngredientList</string>
+    <string name="sorry_toast">Sorry Could not fetch data</string>
+    <string name="steps_number">StepNumber</string>
+    <string name="description">Description</string>
+
+</resources>

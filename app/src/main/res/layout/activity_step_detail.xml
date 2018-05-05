@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".StepDetailActivity"
+    android:background="@color/black"
+    tools:ignore="MergeRootFrame">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/step_detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/detail_scroll"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:paddingTop="@dimen/widget_margin"
+            android:paddingBottom="@dimen/widget_margin"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/nextButton"
+                android:text="@string/next"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textSize="20sp"
+                android:onClick="nextClick"
+                android:paddingRight="@dimen/list_margin"
+                android:layout_centerVertical="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/previous"
+                android:id="@+id/previousButton"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:onClick="previousClick"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textSize="20sp"
+                android:paddingLeft="@dimen/list_margin"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>
