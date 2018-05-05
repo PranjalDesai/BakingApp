@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
     private GridLayoutManager gridLayoutManager;
     SharedPreferences mPreferences;
     ArrayList<String> imageURL, title, id, serving;
+    String receiver;
+    private static int scrollPosition;
+    int column;
 
     @Nullable
     private SimpleIdlingResource mIdlingResource;
@@ -54,11 +57,8 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Gson gson= new Gson();
         Intent intent= getIntent();
         mPreferences = getSharedPreferences(getString(R.string.apiDataPreferences), Context.MODE_PRIVATE);
-
-        String receiver;
 
         if(intent.hasExtra(getResources().getString(R.string.baking))){
             receiver= intent.getStringExtra(getResources().getString(R.string.baking));
@@ -66,18 +66,21 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
             receiver= mPreferences.getString(getString(R.string.apiData), "");
         }
 
-        if(!receiver.isEmpty()) {
-            bakingResults = new ArrayList<>(Arrays.asList(gson.fromJson(receiver, BakingResult[].class)));
-        }
-
         boolean isTablet = getResources().getBoolean(R.bool.isTablet);
-        int column;
         if(isTablet){
             column=3;
-        }else{
+        } else{
             column=1;
         }
 
+        loadRecyclerView();
+    }
+
+    public void loadRecyclerView(){
+        Gson gson= new Gson();
+        if(!receiver.isEmpty()) {
+            bakingResults = new ArrayList<>(Arrays.asList(gson.fromJson(receiver, BakingResult[].class)));
+        }
         if(bakingResults!=null){
             gridLayoutManager= new GridLayoutManager(this,column);
             mRecylerView.setLayoutManager(gridLayoutManager);
@@ -96,6 +99,33 @@ public class MainActivity extends AppCompatActivity implements RecipeListAdapter
             mRecylerView.setAdapter(movieAdaptor);
         }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(getString(R.string.scroll),gridLayoutManager.findFirstVisibleItemPosition());
+        outState.putSerializable(getString(R.string.data), receiver);
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState!=null) {
+            scrollPosition = savedInstanceState.getInt(getString(R.string.scroll));
+            receiver = savedInstanceState.getString(getString(R.string.data));
+        }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadRecyclerView();
+        mRecylerView.scrollToPosition(scrollPosition);
+
+    }
+
 
     @Override
     public void onListItemClick(int clickedItemIndex) {

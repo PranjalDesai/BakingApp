@@ -15,7 +15,11 @@
     <string name="next">Next</string>
     <string name="recipe">Recipe</string>
     <string name="steps">Steps</string>
+    <string name="scroll">scroll</string>
+    <string name="data">data</string>
     <string name="baking">baking</string>
+    <string name="play_when_ready">playWhenReady</string>
+    <string name="current_position">currentPosition</string>
     <string name="ingredient_widget_list">bakingIngredientList</string>
     <string name="sorry_toast">Sorry Could not fetch data</string>
     <string name="steps_number">StepNumber</string>

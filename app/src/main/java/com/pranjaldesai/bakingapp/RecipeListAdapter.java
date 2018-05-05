@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -111,9 +112,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             titleView.setText(title);
             servingView.setText(serving);
             try {
-                Picasso.with(mContext)
+                Glide.with(mContext)
                         .load(posterUrl)
-                        .placeholder(R.drawable.food_fork_drink)
+                        .apply(new RequestOptions()
+                                .placeholder(R.drawable.food_fork_drink)
+                                .fitCenter())
                         .into(recipeImageView);
             }catch (Exception e){
                 e.printStackTrace();

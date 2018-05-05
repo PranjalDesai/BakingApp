@@ -20,7 +20,7 @@
                 android:layout_marginEnd="@dimen/widget_margin"
                 android:layout_marginStart="@dimen/widget_margin"
                 android:layout_marginTop="@dimen/widget_margin"
-                app:srcCompat="@drawable/food_fork_drink"
+                android:src="@drawable/food_fork_drink"
                 tools:ignore="VectorDrawableCompat" />
 
             <TextView

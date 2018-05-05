@@ -6,8 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -37,9 +42,13 @@ public class StepDetailFragment extends Fragment {
     SimpleExoPlayerView exoPlayerView;
     @BindView(R.id.step_detail_description)
     TextView description;
+    @BindView(R.id.exo_player_image)
+    ImageView mThumbnail;
+    @BindView(R.id.exo_player_container)
+    RelativeLayout container;
 
     private SimpleExoPlayer player;
-    private long playbackPosition;
+    private long playbackPosition = 0;
     private int currentWindow;
     private boolean playWhenReady = true;
     private String videoUrl="";
@@ -63,34 +72,46 @@ public class StepDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.step_detail, container, false);
+        if (savedInstanceState != null && savedInstanceState.containsKey(getResources().getString(R.string.current_position))) {
+            playbackPosition = savedInstanceState.getLong(getResources().getString(R.string.current_position));
+            playWhenReady = savedInstanceState.getBoolean(getResources().getString(R.string.play_when_ready));
+        }
         ButterKnife.bind(this, rootView);
-
+        container.setVisibility(View.VISIBLE);
 
         if (mStep != null) {
             description.setText(mStep.getDescription());
-
-            boolean videoError= videoErrorString();
-            if(videoError){
-                exoPlayerView.setVisibility(View.GONE);
-            }else{
-                initializePlayer(videoUrl);
-            }
+            videoErrorString();
         }
 
         return rootView;
     }
 
-    private boolean videoErrorString(){
+    private void videoErrorString(){
         if(!mStep.getVideoURL().isEmpty()) {
             videoUrl = mStep.getVideoURL();
-            return false;
+            exoPlayerView.setVisibility(View.VISIBLE);
+            mThumbnail.setVisibility(View.GONE);
+            initializePlayer(videoUrl);
         } else if (!mStep.getThumbnailURL().isEmpty()){
             videoUrl = mStep.getThumbnailURL();
-            return false;
+            exoPlayerView.setVisibility(View.GONE);
+            mThumbnail.setVisibility(View.VISIBLE);
+            try {
+                Glide.with(this)
+                        .load(videoUrl)
+                        .apply(new RequestOptions()
+                                .placeholder(R.drawable.food_fork_drink)
+                                .fitCenter())
+                        .into(mThumbnail);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        } else {
+            container.setVisibility(View.GONE);
+            exoPlayerView.setVisibility(View.GONE);
+            mThumbnail.setVisibility(View.GONE);
         }
-
-        return true;
-
     }
 
     private void initializePlayer(String videoUrl) {
@@ -99,15 +120,23 @@ public class StepDetailFragment extends Fragment {
             player= ExoPlayerFactory.newSimpleInstance(
                     new DefaultRenderersFactory(this.getActivity()),
                     new DefaultTrackSelector(), new DefaultLoadControl());
-
             exoPlayerView.setPlayer(player);
-            player.setPlayWhenReady(playWhenReady);
-            player.seekTo(currentWindow, playbackPosition);
-
         }
         MediaSource mediaSource = buildMediaSource(Uri.parse(videoUrl));
         player.prepare(mediaSource, true, false);
+        if (playbackPosition != 0) {
+            player.setPlayWhenReady(playWhenReady);
+            player.seekTo(currentWindow, playbackPosition);
+        }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(getResources().getString(R.string.current_position), playbackPosition);
+        outState.putBoolean(getResources().getString(R.string.play_when_ready), playWhenReady);
+    }
+
 
     private MediaSource buildMediaSource(Uri uri) {
         return new ExtractorMediaSource.Factory(new DefaultHttpDataSourceFactory("baking-exoplayer"))
@@ -128,12 +157,7 @@ public class StepDetailFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (Util.SDK_INT > 23) {
-            boolean videoError= videoErrorString();
-            if(videoError){
-                exoPlayerView.setVisibility(View.GONE);
-            }else{
-                initializePlayer(videoUrl);
-            }
+            videoErrorString();
         }
     }
 
@@ -141,21 +165,14 @@ public class StepDetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if ((Util.SDK_INT <= 23 || player == null)) {
-            boolean videoError= videoErrorString();
-            if(videoError){
-                exoPlayerView.setVisibility(View.GONE);
-            }else{
-                initializePlayer(videoUrl);
-            }
+            videoErrorString();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (Util.SDK_INT <= 23) {
-            releasePlayer();
-        }
+        releasePlayer();
     }
 
     @Override
