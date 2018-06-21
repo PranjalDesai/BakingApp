@@ -1,5 +1,4 @@
 # BakingApp
-# PopularMovies2
 
 What it Does:
   
@@ -22,7 +21,15 @@ Features:
 How To Use:
   
   Please all the API Key from https://www.themoviedb.org/ and place it in the strings.xml file. Under the moviedb_api_key
-  
-  ![alt text](https://raw.githubusercontent.com/PranjalDesai/material-xyz-reader/master/Screenshots/Screenshot_20180621-122540.png)
 
-<img src="https://raw.githubusercontent.com/PranjalDesai/material-xyz-reader/master/Screenshots/Screenshot_20180621-122540.png">
+[Screenshot 1][screen_1] | [Screenshot 2][screen_2] | [Screenshot 3][screen_3] | [Screenshot 4][screen_4]
+--- | --- | --- | --- 
+![screen_1] | ![screen_2] | ![screen_3] | ![screen_4]
+
+[screen_1]: https://raw.githubusercontent.com/PranjalDesai/BakingApp/master/Screenshots/Screenshot_20180621-122611.png
+
+[screen_2]: https://raw.githubusercontent.com/PranjalDesai/BakingApp/master/Screenshots/Screenshot_20180621-122615.png
+
+[screen_3]: https://raw.githubusercontent.com/PranjalDesai/BakingApp/master/Screenshots/Screenshot_20180621-122619.png
+
+[screen_4]: https://raw.githubusercontent.com/PranjalDesai/BakingApp/master/Screenshots/Screenshot_20180621-122706.png
