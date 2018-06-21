@@ -22,7 +22,7 @@ How To Use:
   
   Please all the API Key from https://www.themoviedb.org/ and place it in the strings.xml file. Under the moviedb_api_key
 
-[Screenshot 1][screen_1] | [Screenshot 2][screen_2] | [Screenshot 3][screen_3] | [Screenshot 4][screen_4]
+[Recipes][screen_1] | [Steps and Ingredients][screen_2] | [Detail Step][screen_3] | [Widget][screen_4]
 --- | --- | --- | --- 
 ![screen_1] | ![screen_2] | ![screen_3] | ![screen_4]
 
