@@ -24,4 +24,5 @@ How To Use:
   Please all the API Key from https://www.themoviedb.org/ and place it in the strings.xml file. Under the moviedb_api_key
   
   
-<img src="https://photos.app.goo.gl/pNDxHdrPiBawaxLY7">
+
+<img src="https://raw.githubusercontent.com/PranjalDesai/material-xyz-reader/blob/master/Screenshots/Screenshot_20180621-122540.png">
