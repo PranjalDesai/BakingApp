@@ -23,6 +23,6 @@ How To Use:
   
   Please all the API Key from https://www.themoviedb.org/ and place it in the strings.xml file. Under the moviedb_api_key
   
-  ![alt text](https://raw.githubusercontent.com/PranjalDesai/material-xyz-reader/Screenshots/Screenshot_20180621-122540.png)
+  ![alt text](https://raw.githubusercontent.com/PranjalDesai/material-xyz-reader/master/Screenshots/Screenshot_20180621-122540.png)
 
-<img src="https://raw.githubusercontent.com/PranjalDesai/material-xyz-reader/Screenshots/Screenshot_20180621-122540.png">
+<img src="https://raw.githubusercontent.com/PranjalDesai/material-xyz-reader/master/Screenshots/Screenshot_20180621-122540.png">
